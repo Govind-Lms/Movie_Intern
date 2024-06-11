@@ -1,7 +1,6 @@
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movie_intern/views/all_screen.dart/popular_screen.dart';
 import 'package:movie_intern/views/favorites/fav_screen.dart';
 import 'package:movie_intern/views/genres/genre_screen.dart';
