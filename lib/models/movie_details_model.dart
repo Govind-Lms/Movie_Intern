@@ -1,29 +1,59 @@
-class MovieDetailsModel {
+import 'package:hive/hive.dart';
+part "movie_details_model.g.dart";
+
+@HiveType(typeId: 0)
+class MovieDetailsModel extends HiveObject {
+  @HiveField(0)
   bool? adult;
+  @HiveField(1)
   String? backdropPath;
+  @HiveField(2)
   int? budget;
+  @HiveField(3)
   List<Genres>? genres;
+  @HiveField(4)
   String? homepage;
+  @HiveField(5)
   int? id;
+  @HiveField(6)
   String? imdbId;
+  @HiveField(7)
   List<String>? originCountry;
+  @HiveField(8)
   String? originalLanguage;
+  @HiveField(9)
   String? originalTitle;
+  @HiveField(10)
   String? overview;
+  @HiveField(11)
   double? popularity;
+  @HiveField(12)
   String? posterPath;
+  @HiveField(13)
   List<ProductionCompanies>? productionCompanies;
+  @HiveField(14)
   List<ProductionCountries>? productionCountries;
+  @HiveField(15)
   String? releaseDate;
+  @HiveField(16)
   int? revenue;
+  @HiveField(17)
   int? runtime;
+  @HiveField(18)
   List<SpokenLanguages>? spokenLanguages;
+  @HiveField(19)
   String? status;
+  @HiveField(20)
   String? tagline;
+  @HiveField(21)
   String? title;
+  @HiveField(22)
   bool? video;
+  @HiveField(23)
   double? voteAverage;
+  @HiveField(24)
   int? voteCount;
+  @HiveField(25)
   Videos? videos;
 
   MovieDetailsModel(
@@ -148,9 +178,11 @@ class MovieDetailsModel {
     return data;
   }
 }
-
-class Genres {
+@HiveType(typeId: 1)
+class Genres extends HiveObject{
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String? name;
 
   Genres({this.id, this.name});
@@ -167,11 +199,15 @@ class Genres {
     return data;
   }
 }
-
-class ProductionCompanies {
+@HiveType(typeId: 2)
+class ProductionCompanies extends HiveObject{
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String? logoPath;
+  @HiveField(2)
   String? name;
+  @HiveField(3)
   String? originCountry;
 
   ProductionCompanies({this.id, this.logoPath, this.name, this.originCountry});
@@ -192,9 +228,11 @@ class ProductionCompanies {
     return data;
   }
 }
-
-class ProductionCountries {
+@HiveType(typeId: 3)
+class ProductionCountries extends HiveObject{
+  @HiveField(0)
   String? iso31661;
+  @HiveField(1)
   String? name;
 
   ProductionCountries({this.iso31661, this.name});
@@ -211,10 +249,13 @@ class ProductionCountries {
     return data;
   }
 }
-
-class SpokenLanguages {
+@HiveType(typeId: 4)
+class SpokenLanguages extends HiveObject {
+  @HiveField(0)
   String? englishName;
+  @HiveField(1)
   String? iso6391;
+  @HiveField(2)
   String? name;
 
   SpokenLanguages({this.englishName, this.iso6391, this.name});
@@ -233,17 +274,18 @@ class SpokenLanguages {
     return data;
   }
 }
-
-class Videos {
-  List<Results>? results;
-
+@HiveType(typeId: 5)
+class Videos extends HiveObject{
+  @HiveField(0)
+  List<VideoResults>? results;
+  @HiveField(1)
   Videos({this.results});
 
   Videos.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <VideoResults>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        results!.add(VideoResults.fromJson(v));
       });
     }
   }
@@ -256,20 +298,30 @@ class Videos {
     return data;
   }
 }
-
-class Results {
+@HiveType(typeId: 6)
+class VideoResults extends HiveObject{
+  @HiveField(0)
   String? iso6391;
+  @HiveField(1)
   String? iso31661;
+  @HiveField(2)
   String? name;
+  @HiveField(3)
   String? key;
+  @HiveField(4)
   String? site;
+  @HiveField(5)
   int? size;
+  @HiveField(6)
   String? type;
+  @HiveField(7)
   bool? official;
+  @HiveField(8)
   String? publishedAt;
+  @HiveField(9)
   String? id;
 
-  Results(
+  VideoResults(
       {this.iso6391,
       this.iso31661,
       this.name,
@@ -281,7 +333,7 @@ class Results {
       this.publishedAt,
       this.id});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  VideoResults.fromJson(Map<String, dynamic> json) {
     iso6391 = json['iso_639_1'];
     iso31661 = json['iso_3166_1'];
     name = json['name'];

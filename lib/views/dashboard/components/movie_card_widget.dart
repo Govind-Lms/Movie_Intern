@@ -8,7 +8,7 @@ import 'package:movie_intern/views/details/detail_screen.dart';
 
 class MovieCardWidget extends StatelessWidget {
   final List<Movies>? movie;
-  const MovieCardWidget({super.key,required this.movie});
+  const MovieCardWidget({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {

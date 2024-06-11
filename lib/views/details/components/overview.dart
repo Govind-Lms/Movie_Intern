@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:hive/hive.dart';
 import 'package:movie_intern/state_management/cubit/movies/movie_details/movie_details_cubit.dart';
 import 'package:movie_intern/const/constants.dart';
 import 'package:movie_intern/theme/style.dart';
@@ -90,6 +91,27 @@ class OverviewPart extends StatelessWidget {
                                     style: DetailStyle().ratingStyle,
                                   ),
                                 ],
+                              ),
+                              IconButton(
+                                onPressed: () async{
+                                  await Hive.openBox("favorite");
+                                  final favBox = Hive.box("favorite");
+                                  favBox.add(state.movieDetailModel);
+                                  var key = favBox.values.toString();
+                                  const snackBar = SnackBar(
+                                    content: Text(
+                                      "Added Successfully",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  );
+                                  ScaffoldMessenger.of(context).clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                                  print("key : ${key.length}");
+                                  print("box : ${favBox.values.length}");
+
+                                },
+                                icon: const Icon(Icons.favorite),
                               ),
                             ],
                           ),

@@ -45,8 +45,7 @@ class DateClass extends Equatable {
   @override
   List<Object?> get props => [minimum, maximum];
 }
-
-class Movies  {
+class Movies{
   int? id;
   int? voteCount;
   bool? video;

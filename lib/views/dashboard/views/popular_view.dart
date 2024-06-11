@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_intern/state_management/cubit/movies/popular_cubit/popular_cubit.dart';
-import 'package:movie_intern/views/dashboard/components/card_widget.dart';
+import 'package:movie_intern/views/dashboard/components/movie_card_widget.dart';
 
 class PopularView extends StatelessWidget {
   const PopularView({super.key});
