@@ -1,21 +1,23 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:movie_intern/models/models.dart';
-import 'package:movie_intern/models/movie_details_model.dart';
-import 'package:movie_intern/state_management/bloc/genre/genre_bloc.dart';
-import 'package:movie_intern/state_management/bloc/now_playing/now_playing_bloc.dart';
-import 'package:movie_intern/state_management/bloc/top_rated/toprated_bloc.dart';
-import 'package:movie_intern/state_management/bloc/trending/trending_bloc.dart';
-import 'package:movie_intern/state_management/bloc/upcoming/upcoming_bloc.dart';
-import 'package:movie_intern/state_management/cubit/movies/nowplaying_cubit/nowplaying_cubit.dart';
-import 'package:movie_intern/state_management/cubit/searchs/search_movie/search_movie_cubit.dart';
-import 'package:movie_intern/views/all_screen.dart/bottom_nav.dart';
+import 'package:movie_intern/src/core/models/models.dart';
+import 'package:movie_intern/src/core/models/movie_details_model.dart';
+import 'package:movie_intern/src/core/state_management/bloc/genre/genre_bloc.dart';
+import 'package:movie_intern/src/core/state_management/bloc/now_playing/now_playing_bloc.dart';
+import 'package:movie_intern/src/core/state_management/bloc/top_rated/toprated_bloc.dart';
+import 'package:movie_intern/src/core/state_management/bloc/trending/trending_bloc.dart';
+import 'package:movie_intern/src/core/state_management/bloc/upcoming/upcoming_bloc.dart';
+import 'package:movie_intern/src/core/state_management/cubit/movies/nowplaying_cubit/nowplaying_cubit.dart';
+import 'package:movie_intern/src/core/state_management/cubit/searchs/search_movie/search_movie_cubit.dart';
+import 'package:movie_intern/src/presentation/views/all_screen.dart/bottom_nav.dart';
 import 'package:path_provider/path_provider.dart';
-import 'state_management/cubit/movies/popular_cubit/popular_cubit.dart';
+import 'src/core/state_management/cubit/movies/popular_cubit/popular_cubit.dart';
 
 void main() async{
+  
   setUp();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -28,9 +30,9 @@ void main() async{
 void setUp () async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  final directory = await getApplicationDocumentsDirectory();
+  final directory = await getAppDirectory();
   Hive
-    ..init(directory.path)
+    ..init(directory)
     ..openBox("favorite")
     ..registerAdapter(MovieDetailsModelAdapter())
     ..registerAdapter(VideoResultsAdapter())
@@ -40,6 +42,14 @@ void setUp () async{
     ..registerAdapter(VideosAdapter())
     ..registerAdapter(ProductionCompaniesAdapter());
 
+}
+Future getAppDirectory() async {
+  if (kIsWeb) {
+    return "/assets/temp";
+  } else {
+    return await getApplicationDocumentsDirectory()
+        .then((directory) => directory.path);
+  }
 }
 
 class MyApp extends StatelessWidget {
